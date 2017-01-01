@@ -166,7 +166,8 @@ err_out:
 
 void host_enable_int(struct dm642_dev *dev);
 //extern irqreturn_t dm642_interrupt(int irq, void *dev_id, struct pt_regs *regs);
-extern irq_handler_t dm642_interrupt(int irq, void *dev_id, struct pt_regs *regs);
+//extern irq_handler_t dm642_interrupt(int irq, void *dev_id);
+extern irqreturn_t dm642_interrupt(int irq, void *dev_id);
 
 
 extern int dm642_setup_cdev(struct dm642_dev *dev, int index);
