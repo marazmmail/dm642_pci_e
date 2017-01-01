@@ -75,6 +75,13 @@ dmesg out
 [139170.942932] driver: 'dm642_pci': driver_bound: bound to device '0000:02:07.0'
 [139170.942936] bus: 'pci': really_probe: bound device 0000:02:07.0 to driver dm642_pci
 
+:~/git/dm642_pci_e$ ls -la /dev/dm6*
+lrwxrwxrwx 1 root root      10 Jan  1 23:27 /dev/dm642_pci -> dm642_pci0
+crw-rw-r-- 1 root staff 242, 0 Jan  1 23:27 /dev/dm642_pci0
+crw-rw-r-- 1 root staff 242, 1 Jan  1 23:27 /dev/dm642_pci1
+crw-rw-r-- 1 root staff 242, 2 Jan  1 23:27 /dev/dm642_pci2
+crw-rw-r-- 1 root staff 242, 3 Jan  1 23:27 /dev/dm642_pci3
+crw-r--r-- 1 root root  242, 4 Jan  1 23:27 /dev/dm642_pci4
 
 
 lspci -vv
