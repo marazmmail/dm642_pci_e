@@ -1,4 +1,4 @@
-//#include <linux/config.h>
+//#include <linux/config.h> /* Fix for modern kernels */ 
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/init.h>
@@ -566,10 +566,8 @@ ssize_t task_write(struct file *filp, const char __user *buf, size_t count,
 	return count;
 }
 
-static int ioctl_usercopy(struct inode *inode, struct file *file, /* .ioctl to .unlocked_ioctl for task_ioctl */
-//static int ioctl_usercopy(struct file *file,
+static int ioctl_usercopy(struct inode *inode, struct file *file,
 	       unsigned int cmd, unsigned long arg,
-	       //int (*func)(struct inode *inode, struct file *file, /* .ioctl to .unlocked_ioctl for task_ioctl */
 		   int (*func)(struct inode *inode, struct file *file,
 			   unsigned int cmd, void *arg))
 {
@@ -604,8 +602,7 @@ static int ioctl_usercopy(struct inode *inode, struct file *file, /* .ioctl to .
 	}
 
 	/* call driver */
-	err = func(inode, file, cmd, parg); /* .ioctl to .unlocked_ioctl for task_ioctl */
-	// err = func(file, cmd, parg);
+	err = func(inode, file, cmd, parg);
 	if (err == -ENOIOCTLCMD)
 		err = -EINVAL;
 	if (err < 0)
@@ -818,11 +815,12 @@ static int task_do_ioctl (struct inode *inode, struct file *filp, unsigned int c
 	return retval;
 }
 
-//static int task_ioctl (struct inode *inode, struct file *filp, unsigned int cmd, unsigned long arg) /* .ioctl to .unlocked_ioctl for task_ioctl */
+//static int task_ioctl (struct inode *inode, struct file *filp, unsigned int cmd, unsigned long arg) 
+/* .ioctl to .unlocked_ioctl for task_ioctl */ /* Fix for modern kernels */ 
 static long task_ioctl (struct file *filp, unsigned int cmd, unsigned long arg)
 {
 	
-	struct inode *inode = file_inode(filp); /* new >3.19 metod for getting inode*/
+	struct inode *inode = file_inode(filp); /* Fix for modern kernels */ 
 	return ioctl_usercopy(inode, filp, cmd, arg, task_do_ioctl);
 }
 
@@ -840,7 +838,7 @@ struct file_operations task_fops = {
 	.release = task_release,
 	.read	 = task_read,
 	.write	 = task_write,
-	//.ioctl	 = task_ioctl, /* .ioctl to .unlocked_ioctl for task_ioctl */
+	//.ioctl	 = task_ioctl, /* .ioctl to .unlocked_ioctl for task_ioctl */ /* Fix for modern kernels */ 
 	.unlocked_ioctl = task_ioctl,
 	.mmap	 = task_mmap,
 	.poll	 = task_poll,	

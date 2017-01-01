@@ -1,4 +1,4 @@
-//#include <linux/config.h>
+//#include <linux/config.h> /* Fix for modern kernels */ 
 #include <linux/module.h>
 #include <linux/moduleparam.h>
 #include <linux/init.h>
@@ -13,7 +13,7 @@
 #include <linux/seq_file.h>
 #include <linux/cdev.h>
 
-//#include <asm/system.h>		/* cli(), *_flags */
+//#include <asm/system.h>		/* cli(), *_flags */ /* Fix for modern kernels */ 
 #include <asm/uaccess.h>	/* copy_*_user */
 #include <asm/io.h>
 
@@ -135,11 +135,11 @@ static ssize_t dm642_write (struct file *filp, const char __user *buf, size_t co
 
 extern int dm642_reset_dsp (struct dm642_dev *dev);
 extern void dm642_unreset_dsp(struct dm642_dev *dev);
-//static int dm642_ioctl (struct inode *inode, struct file *filp, unsigned int cmd, unsigned long arg)
+//static int dm642_ioctl (struct inode *inode, struct file *filp, unsigned int cmd, unsigned long arg) /* Fix for modern kernels */ 
 static long dm642_ioctl (struct file *filp, unsigned int cmd, unsigned long arg)
 {
 	struct dm642_dev *dev = filp->private_data;
-	//struct inode *inode = file_inode(filp); /* new >3.19 metod for getting inode*/
+	//struct inode *inode = file_inode(filp); /* Fix for modern kernels */ /* inode not used */
 	int err = 0;
 	long retval = 0;
 	struct emif emif;
@@ -244,7 +244,7 @@ struct file_operations dm642_fops = {
 	.llseek  = dm642_llseek,
 	.read	 = dm642_read,
 	.write	 = dm642_write,
-	//.ioctl	 = dm642_ioctl,
+	//.ioctl	 = dm642_ioctl, /* Fix for modern kernels */
 	.unlocked_ioctl = dm642_ioctl,
 };
 
@@ -252,7 +252,7 @@ extern int dm642_major;
 int dm642_setup_cdev(struct dm642_dev *dev, int index)
 {
 	int err, devno = MKDEV(dm642_major, index);
-    
+    printk(KERN_NOTICE "Adding dm642_dev%d", index); /* Print if init */
 	cdev_init(&dev->cdev, &dm642_fops);
 	dev->cdev.owner = THIS_MODULE;
 	dev->cdev.ops = &dm642_fops;

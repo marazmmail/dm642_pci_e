@@ -33,7 +33,7 @@ int g_handshake_page_offset;
 int g_handshake_page_index;
 int g_devs_num = 0;
 struct dm642_dev **g_devs = NULL;
-//static spinlock_t g_devs_spinlock = SPIN_LOCK_UNLOCKED; /*  */
+//static spinlock_t g_devs_spinlock = SPIN_LOCK_UNLOCKED; /* My be fix */
 static DEFINE_SPINLOCK(g_devs_spinlock) ;
 
 
@@ -165,7 +165,10 @@ err_out:
 }
 
 void host_enable_int(struct dm642_dev *dev);
-extern irqreturn_t dm642_interrupt(int irq, void *dev_id, struct pt_regs *regs);
+//extern irqreturn_t dm642_interrupt(int irq, void *dev_id, struct pt_regs *regs);
+extern irq_handler_t dm642_interrupt(int irq, void *dev_id, struct pt_regs *regs);
+
+
 extern int dm642_setup_cdev(struct dm642_dev *dev, int index);
 static int probe(struct pci_dev *pdev, const struct pci_device_id *id)
 {
@@ -192,8 +195,8 @@ static int probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	}
 	memset(dev->printkBuf, 0, iopacket_size);
 	
-	//init_MUTEX(&dev->hw_access_sem); /*  init_MUTEX{_LOCKED}() was initially implemented as a semaphore.  */
-	//init_MUTEX(&dev->task_access_sem); /*  init_MUTEX{_LOCKED}() was initially implemented as a semaphore.  sema_init(&(lptr->device.sem), 1); */
+	//init_MUTEX(&dev->hw_access_sem); /* Fix init_MUTEX{_LOCKED}() was initially implemented as a semaphore.  */
+	//init_MUTEX(&dev->task_access_sem); /* Fix  init_MUTEX{_LOCKED}() was initially implemented as a semaphore.  sema_init(&(lptr->device.sem), 1); */
 	sema_init(&dev->hw_access_sem,1);
 	sema_init(&dev->task_access_sem,1);
 
@@ -212,7 +215,9 @@ static int probe(struct pci_dev *pdev, const struct pci_device_id *id)
 	spin_unlock(&g_devs_spinlock);
 
 	
-	ret = request_irq (dev->pci_dev->irq, dm642_interrupt, IRQF_SHARED, "dm642_pci", dev);
+	ret = request_irq (dev->pci_dev->irq, dm642_interrupt, IRQF_SHARED, "dm642_pci", dev); /* Fix for 
+	modern kernels SA_SHIRQ - IRQF_SHARED*/
+	
 	if (ret){
 		printk(KERN_ERR "request_irq %d failed!",dev->pci_dev->irq);
 	}
