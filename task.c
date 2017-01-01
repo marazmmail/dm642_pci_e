@@ -1,4 +1,3 @@
-
 //#include <linux/config.h>
 #include <linux/module.h>
 #include <linux/moduleparam.h>
@@ -819,11 +818,12 @@ static int task_do_ioctl (struct inode *inode, struct file *filp, unsigned int c
 	return retval;
 }
 
-static int task_ioctl (struct inode *inode, struct file *filp, unsigned int cmd, unsigned long arg) /* .ioctl to .unlocked_ioctl for task_ioctl */
-// static int task_ioctl (struct file *filp, unsigned int cmd, unsigned long arg)
+//static int task_ioctl (struct inode *inode, struct file *filp, unsigned int cmd, unsigned long arg) /* .ioctl to .unlocked_ioctl for task_ioctl */
+static long task_ioctl (struct file *filp, unsigned int cmd, unsigned long arg)
 {
+	
+	struct inode *inode = file_inode(filp); /* new >3.19 metod for getting inode*/
 	return ioctl_usercopy(inode, filp, cmd, arg, task_do_ioctl);
-	// return ioctl_usercopy(filp, cmd, arg, task_do_ioctl);
 }
 
 static unsigned int task_poll(struct file *filp, poll_table *wait)
@@ -929,4 +929,3 @@ irqreturn_t dm642_interrupt(int irq, void *dev_id, struct pt_regs *regs)
 		
         return IRQ_HANDLED;
 }
-

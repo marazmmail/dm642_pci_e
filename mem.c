@@ -135,13 +135,12 @@ static ssize_t dm642_write (struct file *filp, const char __user *buf, size_t co
 
 extern int dm642_reset_dsp (struct dm642_dev *dev);
 extern void dm642_unreset_dsp(struct dm642_dev *dev);
-
-//static int dm642_ioctl (struct inode *inode, struct file *filp, unsigned int cmd, unsigned long arg) /* replace .ioctl to .unlocked_ioctl */
-static int dm642_ioctl (struct file *filp, unsigned int cmd, unsigned long arg)
+//static int dm642_ioctl (struct inode *inode, struct file *filp, unsigned int cmd, unsigned long arg)
+static long dm642_ioctl (struct file *filp, unsigned int cmd, unsigned long arg)
 {
 	struct dm642_dev *dev = filp->private_data;
+	//struct inode *inode = file_inode(filp); /* new >3.19 metod for getting inode*/
 	int err = 0;
-	//int retval = 0; /* replace .ioctl to .unlocked_ioctl */
 	long retval = 0;
 	struct emif emif;
    	struct regval regval; 
@@ -245,9 +244,8 @@ struct file_operations dm642_fops = {
 	.llseek  = dm642_llseek,
 	.read	 = dm642_read,
 	.write	 = dm642_write,
-	
 	//.ioctl	 = dm642_ioctl,
-	.unlocked_ioctl	 = dm642_ioctl,
+	.unlocked_ioctl = dm642_ioctl,
 };
 
 extern int dm642_major;
