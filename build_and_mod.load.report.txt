@@ -1,0 +1,180 @@
+:~/git/dm642_pci_e$ make
+make -C /lib/modules/4.4.35/build M=/home/sli/git/dm642_pci_e modules
+make[1]: Entering directory '/home/sli/download/linux-4.4.0'
+  CC [M]  /home/sli/git/dm642_pci_e/pci.o
+  CC [M]  /home/sli/git/dm642_pci_e/mem.o
+  CC [M]  /home/sli/git/dm642_pci_e/proc.o
+  CC [M]  /home/sli/git/dm642_pci_e/task.o
+/home/sli/git/dm642_pci_e/task.c: In function ‘task_open’:
+/home/sli/git/dm642_pci_e/task.c:317:3: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+   struct iopacket p;
+   ^
+/home/sli/git/dm642_pci_e/task.c: In function ‘task_release’:
+/home/sli/git/dm642_pci_e/task.c:361:3: warning: ISO C90 forbids mixed declarations and code [-Wdeclaration-after-statement]
+   struct iopacket p;
+   ^
+  CC [M]  /home/sli/git/dm642_pci_e/mmap.o
+  CC [M]  /home/sli/git/dm642_pci_e/dm642.o
+  LD [M]  /home/sli/git/dm642_pci_e/dm642_pci.o
+  Building modules, stage 2.
+  MODPOST 1 modules
+  CC      /home/sli/git/dm642_pci_e/dm642_pci.mod.o
+  LD [M]  /home/sli/git/dm642_pci_e/dm642_pci.ko
+make[1]: Leaving directory '/home/sli/download/linux-4.4.0'
+
+dmesg out
+[139170.941086] dm642_pci: module verification failed: signature and/or required key missing - tainting kernel
+[139170.941721] alloc_chrdev_region: major = 242 count = 1024
+[139170.941737] bus: 'pci': add driver dm642_pci
+[139170.941752] bus: 'pci': driver_probe_device: matched device 0000:02:04.0 with driver dm642_pci
+[139170.941757] bus: 'pci': really_probe: probing driver dm642_pci with device 0000:02:04.0
+[139170.941765] dm642_pci 0000:02:04.0: no default pinctrl state
+[139170.941775] devices_kset: Moving 0000:02:04.0 to end of list
+[139170.941784] dm642_pci: pci dev 0000:02:04.0 (id 104c:9065 rev 01) detected.
+[139170.941989] dm642_pci: 0000:02:04.0: Base0: dec00000, len: 400000. - Prefetchable memory MAP to: ffffc90004000000
+[139170.942002] dm642_pci: 0000:02:04.0: Base1: dd800000, len: 800000. - Non-Prefetchable memory MAP to: ffffc90005000000
+[139170.942005] dm642_pci: 0000:02:04.0: Base2: e030, len: 10. - IO
+[139170.942008] dm642_pci: irq = 16
+[139170.942121] Adding dm642_dev0
+[139170.942130] driver: 'dm642_pci': driver_bound: bound to device '0000:02:04.0'
+[139170.942139] bus: 'pci': really_probe: bound device 0000:02:04.0 to driver dm642_pci
+[139170.942145] bus: 'pci': driver_probe_device: matched device 0000:02:05.0 with driver dm642_pci
+[139170.942148] bus: 'pci': really_probe: probing driver dm642_pci with device 0000:02:05.0
+[139170.942154] dm642_pci 0000:02:05.0: no default pinctrl state
+[139170.942164] devices_kset: Moving 0000:02:05.0 to end of list
+[139170.942170] dm642_pci: pci dev 0000:02:05.0 (id 104c:9065 rev 01) detected.
+[139170.942318] dm642_pci: 0000:02:05.0: Base0: de800000, len: 400000. - Prefetchable memory MAP to: ffffc90004800000
+[139170.942329] dm642_pci: 0000:02:05.0: Base1: dd000000, len: 800000. - Non-Prefetchable memory MAP to: ffffc90006000000
+[139170.942332] dm642_pci: 0000:02:05.0: Base2: e020, len: 10. - IO
+[139170.942334] dm642_pci: irq = 17
+[139170.942402] Adding dm642_dev1024
+[139170.942410] driver: 'dm642_pci': driver_bound: bound to device '0000:02:05.0'
+[139170.942415] bus: 'pci': really_probe: bound device 0000:02:05.0 to driver dm642_pci
+[139170.942419] bus: 'pci': driver_probe_device: matched device 0000:02:06.0 with driver dm642_pci
+[139170.942422] bus: 'pci': really_probe: probing driver dm642_pci with device 0000:02:06.0
+[139170.942427] dm642_pci 0000:02:06.0: no default pinctrl state
+[139170.942436] devices_kset: Moving 0000:02:06.0 to end of list
+[139170.942442] dm642_pci: pci dev 0000:02:06.0 (id 104c:9065 rev 01) detected.
+[139170.942574] dm642_pci: 0000:02:06.0: Base0: de400000, len: 400000. - Prefetchable memory MAP to: ffffc90007000000
+[139170.942584] dm642_pci: 0000:02:06.0: Base1: dc800000, len: 800000. - Non-Prefetchable memory MAP to: ffffc90008000000
+[139170.942587] dm642_pci: 0000:02:06.0: Base2: e010, len: 10. - IO
+[139170.942589] dm642_pci: irq = 18
+[139170.942660] Adding dm642_dev1024
+[139170.942667] driver: 'dm642_pci': driver_bound: bound to device '0000:02:06.0'
+[139170.942672] bus: 'pci': really_probe: bound device 0000:02:06.0 to driver dm642_pci
+[139170.942676] bus: 'pci': driver_probe_device: matched device 0000:02:07.0 with driver dm642_pci
+[139170.942679] bus: 'pci': really_probe: probing driver dm642_pci with device 0000:02:07.0
+[139170.942685] dm642_pci 0000:02:07.0: no default pinctrl state
+[139170.942693] devices_kset: Moving 0000:02:07.0 to end of list
+[139170.942699] dm642_pci: pci dev 0000:02:07.0 (id 104c:9065 rev 01) detected.
+[139170.942849] dm642_pci: 0000:02:07.0: Base0: de000000, len: 400000. - Prefetchable memory MAP to: ffffc90007800000
+[139170.942859] dm642_pci: 0000:02:07.0: Base1: dc000000, len: 800000. - Non-Prefetchable memory MAP to: ffffc90009000000
+[139170.942862] dm642_pci: 0000:02:07.0: Base2: e000, len: 10. - IO
+[139170.942864] dm642_pci: irq = 19
+[139170.942925] Adding dm642_dev1024
+[139170.942932] driver: 'dm642_pci': driver_bound: bound to device '0000:02:07.0'
+[139170.942936] bus: 'pci': really_probe: bound device 0000:02:07.0 to driver dm642_pci
+
+
+
+lspci -vv
+
+01:00.0 PCI bridge: Texas Instruments XIO2000(A)/XIO2200A PCI Express-to-PCI Bridge (rev 03) (prog-if 00 [Normal decode])
+        Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx-
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=fast >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+        Latency: 0
+        Bus: primary=01, secondary=02, subordinate=02, sec-latency=32
+        I/O behind bridge: 0000e000-0000efff
+        Memory behind bridge: dc000000-deffffff
+        Secondary status: 66MHz- FastB2B+ ParErr- DEVSEL=medium >TAbort- <TAbort- <MAbort+ <SERR- <PERR-
+        BridgeCtl: Parity- SERR- NoISA- VGA- MAbort- >Reset- FastB2B-
+                PriDiscTmr- SecDiscTmr- DiscTmrStat- DiscTmrSERREn-
+        Capabilities: [50] Power Management version 2
+                Flags: PMEClk- DSI- D1+ D2+ AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)
+                Status: D0 NoSoftRst- PME-Enable- DSel=0 DScale=0 PME-
+                Bridge: PM- B3+
+        Capabilities: [60] MSI: Enable- Count=1/16 Maskable- 64bit+
+                Address: 0000000000000000  Data: 0000
+        Capabilities: [80] Subsystem: Device 0000:0000
+        Capabilities: [90] Express (v1) PCI-Express to PCI/PCI-X Bridge, MSI 00
+                DevCap: MaxPayload 512 bytes, PhantFunc 0
+                        ExtTag- AttnBtn- AttnInd- PwrInd- RBE-
+                DevCtl: Report errors: Correctable- Non-Fatal- Fatal- Unsupported-
+                        RlxdOrd- ExtTag- PhantFunc- AuxPwr- NoSnoop+ BrConfRtry-
+                        MaxPayload 256 bytes, MaxReadReq 512 bytes
+                DevSta: CorrErr- UncorrErr+ FatalErr- UnsuppReq+ AuxPwr+ TransPend-
+                LnkCap: Port #0, Speed 2.5GT/s, Width x1, ASPM L0s L1, Exit Latency L0s <512ns, L1 <16us
+                        ClockPM- Surprise- LLActRep- BwNot- ASPMOptComp-
+                LnkCtl: ASPM Disabled; RCB 64 bytes Disabled- CommClk+
+                        ExtSynch- ClockPM- AutWidDis- BWInt- AutBWInt-
+                LnkSta: Speed 2.5GT/s, Width x1, TrErr- Train- SlotClk+ DLActive- BWMgmt- ABWMgmt-
+        Capabilities: [100 v1] Advanced Error Reporting
+                UESta:  DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP- ECRC- UnsupReq- ACSViol-
+                UEMsk:  DLP- SDES- TLP- FCP- CmpltTO- CmpltAbrt- UnxCmplt- RxOF- MalfTLP- ECRC- UnsupReq- ACSViol-
+                UESvrt: DLP+ SDES- TLP- FCP+ CmpltTO- CmpltAbrt- UnxCmplt- RxOF+ MalfTLP+ ECRC- UnsupReq- ACSViol-
+                CESta:  RxErr- BadTLP- BadDLLP- Rollover- Timeout- NonFatalErr-
+                CEMsk:  RxErr- BadTLP- BadDLLP- Rollover- Timeout- NonFatalErr-
+                AERCap: First Error Pointer: 14, GenCap+ CGenEn- ChkCap+ ChkEn-
+        Kernel modules: shpchp
+
+02:04.0 Non-VGA unclassified device: Texas Instruments TMS320DM642 (rev 01)
+        Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx-
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=medium >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+        Latency: 32
+        Interrupt: pin A routed to IRQ 16
+        Region 0: Memory at dec00000 (32-bit, prefetchable) [size=4M]
+        Region 1: Memory at dd800000 (32-bit, non-prefetchable) [size=8M]
+        Region 2: I/O ports at e030 [size=16]
+        Capabilities: [40] Power Management version 2
+                Flags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)
+                Status: D0 NoSoftRst- PME-Enable- DSel=0 DScale=0 PME-
+        Kernel driver in use: dm642_pci
+
+02:05.0 Non-VGA unclassified device: Texas Instruments TMS320DM642 (rev 01)
+        Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx-
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=medium >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+        Latency: 32
+        Interrupt: pin A routed to IRQ 17
+        Region 0: Memory at de800000 (32-bit, prefetchable) [size=4M]
+        Region 1: Memory at dd000000 (32-bit, non-prefetchable) [size=8M]
+        Region 2: I/O ports at e020 [size=16]
+        Capabilities: [40] Power Management version 2
+                Flags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)
+                Status: D0 NoSoftRst- PME-Enable- DSel=0 DScale=0 PME-
+        Kernel driver in use: dm642_pci
+
+02:06.0 Non-VGA unclassified device: Texas Instruments TMS320DM642 (rev 01)
+        Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx-
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=medium >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+        Latency: 32
+        Interrupt: pin A routed to IRQ 18
+        Region 0: Memory at de400000 (32-bit, prefetchable) [size=4M]
+        Region 1: Memory at dc800000 (32-bit, non-prefetchable) [size=8M]
+        Region 2: I/O ports at e010 [size=16]
+        Capabilities: [40] Power Management version 2
+                Flags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)
+                Status: D0 NoSoftRst- PME-Enable- DSel=0 DScale=0 PME-
+        Kernel driver in use: dm642_pci
+
+02:07.0 Non-VGA unclassified device: Texas Instruments TMS320DM642 (rev 01)
+        Control: I/O+ Mem+ BusMaster+ SpecCycle- MemWINV- VGASnoop- ParErr- Stepping- SERR- FastB2B- DisINTx-
+        Status: Cap+ 66MHz- UDF- FastB2B- ParErr- DEVSEL=medium >TAbort- <TAbort- <MAbort- >SERR- <PERR- INTx-
+        Latency: 32
+        Interrupt: pin A routed to IRQ 19
+        Region 0: Memory at de000000 (32-bit, prefetchable) [size=4M]
+        Region 1: Memory at dc000000 (32-bit, non-prefetchable) [size=8M]
+        Region 2: I/O ports at e000 [size=16]
+        Capabilities: [40] Power Management version 2
+                Flags: PMEClk- DSI- D1- D2- AuxCurrent=0mA PME(D0-,D1-,D2-,D3hot-,D3cold-)
+                Status: D0 NoSoftRst- PME-Enable- DSel=0 DScale=0 PME-
+        Kernel driver in use: dm642_pci
+
+
+
+
+
+
+
+
+
+
