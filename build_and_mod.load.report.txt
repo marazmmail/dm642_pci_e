@@ -1,3 +1,16 @@
+# uname -a
+Linux zen 4.4.35 #1 SMP Sat Dec 31 06:58:33 MSK 2016 x86_64 x86_64 x86_64 GNU/Linux
+Based on 
+Description:    Ubuntu 16.04.1 LTS
+Release:        16.04
+Codename:       xenial
+added some debug to kernel vmlinuz-4.4.0-57-generic (debug version)
+
+make -v
+GNU Make 4.1
+gcc -v
+gcc version 5.4.0 20160609 (Ubuntu 5.4.0-6ubuntu1~16.04.4)
+
 :~/git/dm642_pci_e$ make
 make -C /lib/modules/4.4.35/build M=/home/sli/git/dm642_pci_e modules
 make[1]: Entering directory '/home/sli/download/linux-4.4.0'
